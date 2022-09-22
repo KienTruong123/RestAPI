@@ -1,0 +1,84 @@
+header {
+    min-height: 70px;
+    width: 100%;
+    overflow: hidden;
+    display: contents;
+    flex-wrap: nowrap;
+    /* border: 1px solid #ddd; */
+    justify-content: space-around;
+    align-items: center;
+}
+
+header a {
+    text-transform: uppercase;
+    /* color: cornflowerblue; */
+}
+
+header ul li {
+    display: inline-block;
+    padding: 0 5px;
+    opacity: 0.6;
+}
+
+header :hover {
+    opacity: 1;
+}
+
+.cart-icon {
+    position: relative;
+    margin-right: 20px;
+}
+
+.cart-icon span {
+    background: crimson;
+    border-radius: 45%;
+    position: absolute;
+    right: -10px;
+    padding: 3px 6px;
+    color: white;
+    font-size: 12px;
+}
+
+.menu {
+    display: none;
+}
+
+/********* NAVBAR **********/
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    font-size: small;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    background-color: #ddd;
+    border-radius: 10%;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky+.content {
+    padding-top: 60px;
+}
