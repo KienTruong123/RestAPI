@@ -4,8 +4,8 @@ import Products from './products'
 import Details from './productDetails'  
 import Login from './auth/Login'
 import Register from './auth/Register'
-import Cart from './cart/Cart'
-import NotFound from './utils/NotFound'
+import Cart from './cart'
+import NotFound from './utils/notFound'
 
 function Main() {
     return (

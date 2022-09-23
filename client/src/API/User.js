@@ -11,26 +11,19 @@ function UserAPI(token) {
         if(token){
             const getUser = async () =>{
                 try {
-                    const res = await axios.get('/user/infor', {
+                    const res = await axios.get('/user/information', {
                         headers: {Authorization: token}
                     })
-
                     setIsLogged(true)
                     res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
-
                     setCart(res.data.cart)
-
                 } catch (err) {
                     alert(err.response.data.msg)
                 }
             }
-
             getUser()
-            
         }
     },[token])
-
-    
 
     const addCart = async (product) => {
         if(!isLogged) return alert("Please login to continue buying")
@@ -41,7 +34,6 @@ function UserAPI(token) {
 
         if(check){
             setCart([...cart, {...product, quantity: 1}])
-
             await axios.patch('/user/addcart', {cart: [...cart, {...product, quantity: 1}]}, {
                 headers: {Authorization: token}
             })

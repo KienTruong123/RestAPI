@@ -3,6 +3,21 @@ const saltRounds = 12
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
+Array.prototype.unique = function () {
+    var a = this.concat()
+    for (var i = 0; i < a.length; ++i) {
+        for (var j = i + 1; j < a.length; ++j) {
+            if (a[i].product_id === a[j].product_id){
+                a[i].quantity+=a[j].quantity
+                a.splice(j--, 1)
+            }
+        }
+    }
+
+    return a
+}
+
+
 userCtrl = {
     register: async (req, res) => {
         try {
@@ -42,16 +57,11 @@ userCtrl = {
     refreshToken: (req, res) => {
         try {
             const refreshToken = req.cookies.refreshtoken
-
-            // check if refresh token is already
             if (!refreshToken)
-                return res.status(400).json({ msg: 'Please login first!' })
-
-            // check if refresh token is valid
-            jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+                return res.status(400).json({ msg: 'Please login first!1' })
+            jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, user) => {
                 if (err)
-                    return res.status(400).json({ msg: "Please login first!" })
-
+                    return res.status(400).json({ msg: "Please login first!2" })
                 const accessToken = createAccessToken({ id: user.id })
                 res.json({ accessToken })
             })
@@ -63,9 +73,9 @@ userCtrl = {
     },
     login: async (req, res) => {
         try {
-            const { email_phone, password } = req.body
+            const { email, password } = req.body
             // console.log(email_phone, password)
-            const user = await Users.findOne({ email_phone })
+            const user = await Users.findOne({ email })
             if (!user)
                 return res.status(400).json({ msg: "Incorrect email,phone or password" })
 
@@ -106,6 +116,35 @@ userCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
+    history: async (req, res) => {
+        try {
+            res.json({})
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    addToCard: async (req, res) => {
+        try {
+            const user = await Users.findById(req.user.id)
+            if (!user) return res.status(400).json({ msg: "User ID does not exist!" })
+            let cart = [...user.cart, ...req.body.cart].unique()
+            await Users.findOneAndUpdate({ _id: req.user.id }, { cart })
+            return res.json({ msg: "Added to cart" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    updateCard: async (req, res) => {
+        try {
+            const user = await Users.findById(req.user.id)
+            if (!user) return res.status(400).json({ msg: "User ID does not exist!" })
+            await Users.findOneAndUpdate({ _id: req.user.id }, { cart: req.body.cart })
+            return res.json({ msg: "Added to cart" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    }
+
 }
 
 const createAccessToken = (user_id) => {

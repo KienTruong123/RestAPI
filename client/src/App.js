@@ -8,7 +8,7 @@ function App() {
   return (
     <DataProvider>
       <Router>
-        <div className="App">
+        <div className="App" id='wrap'>
           <Header></Header>
           <Main></Main>
         </div>

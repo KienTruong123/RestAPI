@@ -12,4 +12,9 @@ router.get('/information', auths, userCtrl.getUser)
 
 router.get('/refresh_token', userCtrl.refreshToken)
 
+router.put('/cart', userCtrl.addToCart)
+
+router.patch('/cart', userCtrl.updateCart)
+
+router.get('/history', auths, userCtrl.history)
 module.exports = router

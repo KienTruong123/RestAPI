@@ -1,6 +1,7 @@
+/*  cursive, fantasy */
 * {
   margin: 0;
-  font-family: cursive, fantasy ,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -35,9 +36,15 @@ button{
   cursor: pointer;
 }
 
+/* HEADER */
 @import url("./components/headers/index.css");
+/* PRODUCT */
 @import url("./components/pages/products/index.css");
 /* LOADING */
 @import url("./components/pages/utils/loading/index.css");
+/* LOGIN/REGISTER */
+@import url("./components/pages/auth/index.css");
+
+
 
 

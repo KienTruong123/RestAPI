@@ -24,7 +24,7 @@ header :hover {
     opacity: 1;
 }
 
-.cart-icon {
+/* .cart-icon {
     position: relative;
     margin-right: 20px;
 }
@@ -37,7 +37,7 @@ header :hover {
     padding: 3px 6px;
     color: white;
     font-size: 12px;
-}
+} */
 
 .menu {
     display: none;
